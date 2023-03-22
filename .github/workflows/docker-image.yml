@@ -17,4 +17,4 @@ jobs:
     - name: List current directory contents
       run: ls -la
     - name: Build the Docker image
-      run: docker build ./pt112-tf29-jax0314-py39/ --file Dockerfile --tag gradient-base-container:$(date +%s)
+      run: docker build . --file pt112-tf29-jax0314-py39/Dockerfile --tag gradient-base-container:$(date +%s)
