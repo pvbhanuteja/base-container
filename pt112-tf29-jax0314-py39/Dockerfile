@@ -273,12 +273,29 @@
         $APT_INSTALL nodejs  && \
         $PIP_INSTALL jupyter_contrib_nbextensions jupyterlab-git && \
         jupyter contrib nbextension install --user
+
+# ==================================================================
+# Node.js and Jupyter Notebook Extensions
+# ------------------------------------------------------------------
+
+    RUN curl -sL https://deb.nodesource.com/setup_16.x | bash  && \
+        $APT_INSTALL nodejs  && \
+        $PIP_INSTALL jupyter_contrib_nbextensions jupyterlab-git && \
+        jupyter contrib nbextension install --user  
+
+# ==================================================================
+# Cloudflared - Argo Tunnel
+# ------------------------------------------------------------------
+
+    RUN curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && \
+        dpkg -i cloudflared.deb && \
+        cloudflared service install eyJhIjoiNDViM2M5NzQ1ZGU4YzQ0ZDdiODZhOWRiZTM1MTRkZjEiLCJ0IjoiMzRmMzg1YTMtOTA4NC00ODdjLWExODUtZTg1MjI4YjExZDAyIiwicyI6IlpXSmhZMkV5TTJZdE5UWmhZeTAwTW1JeExXSXhORGd0WWpCak5UTmhabVZtTjJZdyJ9
                 
 
 # ==================================================================
 # Startup
 # ------------------------------------------------------------------
 
-    EXPOSE 8888 6006
+    EXPOSE 8888 6006 22 8889
 
     CMD jupyter lab --allow-root --ip=0.0.0.0 --no-browser --ServerApp.trust_xheaders=True --ServerApp.disable_check_xsrf=False --ServerApp.allow_remote_access=True --ServerApp.allow_origin='*' --ServerApp.allow_credentials=True
