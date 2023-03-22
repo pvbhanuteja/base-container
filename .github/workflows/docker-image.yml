@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag gradient-base-container:$(date +%s)
+      run: docker build ./pt112-tf29-jax0314-py39/ --file Dockerfile --tag gradient-base-container:$(date +%s)
